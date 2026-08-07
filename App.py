@@ -5,9 +5,10 @@ import pickle
 st.title("🏠 House Price Prediction")
 
 # Load model
-model = pickle.load(
-    open("house_price_model.pkl", "rb")
-)
+import pickle
+
+with open("models/house_price_model.pkl", "rb") as f:
+    model = pickle.load(f)
 
 st.write("Enter house details")
 
