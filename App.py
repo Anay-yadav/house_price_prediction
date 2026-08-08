@@ -15,7 +15,7 @@ st.write("Enter house details")
 area = st.number_input("Living Area (GrLivArea)")
 bedrooms = st.number_input("Bedrooms")
 bathrooms = st.number_input("Bathrooms")
-
+YearBuilt = st.number_input("YearBuilt", min_value=1800, max_value=2026, value=2015)
 
 if st.button("Predict Price"):
 
@@ -30,6 +30,7 @@ if st.button("Predict Price"):
     input_data["GrLivArea"] = area
     input_data["BedroomAbvGr"] = bedrooms
     input_data["FullBath"] = bathrooms
+    input_data["YearBuilt"] = YearBuilt
 
 
     prediction = model.predict(input_data)
