@@ -15,7 +15,7 @@ with open("models/house_price_model.pkl", "rb") as f:
 # HOUSE DETAILS
 # -----------------------------
 
-st.header("🏠 House Details")
+st.header("🏠 House Details according to your use ")
 
 area = st.number_input(
     "Living Area (GrLivArea)",
@@ -113,5 +113,5 @@ if st.button("🔮 Predict Price"):
     prediction = model.predict(input_data)
 
     st.success(
-        f"🏠 Predicted House Price: ₹ {prediction[0]:,.2f}"
+        f"🏠 Predicted House Price: $ {prediction[0]:,.2f}"
     )
