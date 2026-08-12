@@ -1,0 +1,572 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>House Price Prediction | Machine Learning</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: #111827;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #111827, #2563eb);
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #93c5fd;
+        }
+
+        .hero p {
+            font-size: 19px;
+            color: #e5e7eb;
+            margin-bottom: 35px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: white;
+            color: #1d4ed8;
+        }
+
+        .secondary {
+            border: 1px solid white;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Sections */
+        section {
+            padding: 75px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 34px;
+            margin-bottom: 45px;
+            color: #111827;
+        }
+
+        .section-title span {
+            color: #2563eb;
+        }
+
+        /* About */
+        .about {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+            font-size: 17px;
+            color: #4b5563;
+        }
+
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+        }
+
+        .card h3 {
+            color: #2563eb;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #6b7280;
+        }
+
+        /* Technologies */
+        .tech-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tech {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        /* Results */
+        .results {
+            background: #111827;
+            color: white;
+        }
+
+        .results .section-title {
+            color: white;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .result-card {
+            text-align: center;
+            padding: 30px;
+            border: 1px solid #374151;
+            border-radius: 14px;
+        }
+
+        .result-card h2 {
+            font-size: 38px;
+            color: #60a5fa;
+        }
+
+        .result-card p {
+            color: #d1d5db;
+        }
+
+        /* Workflow */
+        .workflow {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .step {
+            background: white;
+            padding: 22px;
+            margin-bottom: 15px;
+            border-left: 5px solid #2563eb;
+            border-radius: 8px;
+        }
+
+        .step strong {
+            color: #2563eb;
+        }
+
+        /* Contact */
+        .contact {
+            text-align: center;
+        }
+
+        .contact p {
+            color: #6b7280;
+            margin-bottom: 25px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 55px 6%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">House Price ML</div>
+
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#technology">Technology</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#workflow">Workflow</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                House Price <span>Prediction</span>
+            </h1>
+
+            <p>
+                A Machine Learning project that predicts house prices
+                using real-world housing data and regression algorithms.
+            </p>
+
+            <div class="buttons">
+
+                <a
+                    href="https://github.com/Anay-yadav/house_price_prediction"
+                    class="btn primary"
+                    target="_blank">
+                    View GitHub
+                </a>
+
+                <a href="#results" class="btn secondary">
+                    View Results
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- About -->
+    <section id="about">
+
+        <h2 class="section-title">
+            About <span>Project</span>
+        </h2>
+
+        <div class="about">
+
+            <p>
+                House Price Prediction is a Machine Learning project
+                developed to estimate house prices based on different
+                property features.
+            </p>
+
+            <br>
+
+            <p>
+                The project includes data preprocessing, exploratory
+                data analysis, feature engineering, model training,
+                evaluation and prediction.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Technologies -->
+    <section id="technology">
+
+        <h2 class="section-title">
+            Technologies <span>Used</span>
+        </h2>
+
+        <div class="tech-container">
+
+            <div class="tech">Python</div>
+            <div class="tech">Pandas</div>
+            <div class="tech">NumPy</div>
+            <div class="tech">Matplotlib</div>
+            <div class="tech">Scikit-Learn</div>
+            <div class="tech">Jupyter Notebook</div>
+            <div class="tech">Streamlit</div>
+            <div class="tech">Git & GitHub</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Models -->
+    <section>
+
+        <h2 class="section-title">
+            Machine Learning <span>Models</span>
+        </h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Linear Regression</h3>
+
+                <p>
+                    A supervised learning algorithm used to model
+                    the relationship between housing features and
+                    house prices.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Random Forest</h3>
+
+                <p>
+                    An ensemble learning algorithm that combines
+                    multiple decision trees to improve prediction
+                    performance.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Results -->
+    <section id="results" class="results">
+
+        <h2 class="section-title">
+            Model <span>Performance</span>
+        </h2>
+
+        <div class="result-grid">
+
+            <div class="result-card">
+
+                <h2>85.56%</h2>
+
+                <p>
+                    Linear Regression R² Score
+                </p>
+
+            </div>
+
+
+            <div class="result-card">
+
+                <h2>88.84%</h2>
+
+                <p>
+                    Random Forest R² Score
+                </p>
+
+            </div>
+
+
+            <div class="result-card">
+
+                <h2>88.84%</h2>
+
+                <p>
+                    Best Model Performance
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Workflow -->
+    <section id="workflow">
+
+        <h2 class="section-title">
+            Project <span>Workflow</span>
+        </h2>
+
+        <div class="workflow">
+
+            <div class="step">
+                <strong>01 — Data Collection</strong>
+                <p>
+                    Housing dataset collected for machine learning analysis.
+                </p>
+            </div>
+
+            <div class="step">
+                <strong>02 — Data Preprocessing</strong>
+                <p>
+                    Missing values, categorical variables and numerical
+                    features were processed.
+                </p>
+            </div>
+
+            <div class="step">
+                <strong>03 — Exploratory Data Analysis</strong>
+                <p>
+                    Data was analyzed using statistical methods and
+                    visualizations.
+                </p>
+            </div>
+
+            <div class="step">
+                <strong>04 — Model Training</strong>
+                <p>
+                    Linear Regression and Random Forest models were trained.
+                </p>
+            </div>
+
+            <div class="step">
+                <strong>05 — Model Evaluation</strong>
+                <p>
+                    Models were evaluated using the R² score.
+                </p>
+            </div>
+
+            <div class="step">
+                <strong>06 — Prediction</strong>
+                <p>
+                    The trained model can be used to predict house prices
+                    based on property features.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Contact -->
+    <section class="contact">
+
+        <h2 class="section-title">
+            Explore the <span>Project</span>
+        </h2>
+
+        <p>
+            Check the complete source code, analysis and implementation
+            on GitHub.
+        </p>
+
+        <a
+            href="https://github.com/Anay-yadav/house_price_prediction"
+            class="btn primary"
+            target="_blank">
+            Open GitHub Repository
+        </a>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            © 2026 House Price Prediction
+        </p>
+
+        <p>
+            Developed by
+            <a
+                href="https://github.com/Anay-yadav"
+                target="_blank">
+                Anay Yadav
+            </a>
+        </p>
+
+    </foote
+
+</body>
+</html>
+```
