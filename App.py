@@ -55,13 +55,13 @@ garage_cars = st.number_input(
     "Garage Capacity (Cars)",
     min_value=0,
     max_value=5,
-    value=2
+    value=3
 )
 
 garage_area = st.number_input(
     "Garage Area (sq ft)",
     min_value=0,
-    value=500
+    value=400
 )
 
 basement_area = st.number_input(
@@ -73,7 +73,7 @@ basement_area = st.number_input(
 first_floor = st.number_input(
     "1st Floor Area (sq ft)",
     min_value=0,
-    value=1000
+    value=2000
 )
 
 second_floor = st.number_input(
@@ -89,8 +89,8 @@ second_floor = st.number_input(
 
 if st.button("🔮 Predict Price"):
 
-    # Create dataframe with exactly the
-    # same features used during training
+    # Create dataframe with exactly the same features used during training
+    
     input_data = pd.DataFrame(
         0,
         index=[0],
